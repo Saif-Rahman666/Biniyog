@@ -53,4 +53,7 @@ urlpatterns = [
     path('view_popup', view_popup,name="view_popup"),
     path('status(<int:pid>)', Change_status, name='status'),
     path('particpated_user(<int:pid>)', Participated_user, name='particpated_user'),
+    path('winner(<int:pid>)', Winner,name='winner'),
+    path('winner1(<int:pid>)', Winner1,name='winner1'),
+    path('winner2(<int:pid>)', Winner2,name='winner2'),
 ]

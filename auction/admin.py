@@ -10,3 +10,5 @@ admin.site.register(Participant)
 admin.site.register(Status)
 admin.site.register(Payment)
 admin.site.register(Send_Feedback)
+admin.site.register(Result)
+

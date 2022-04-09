@@ -1162,3 +1162,77 @@ def Participated_user(request,pid):
         message1 = "No Bidder"
     d = {'part':pro1,'error':error,'message1':message1}
     return render(request,'participated_user.html',d)    
+
+def Winner(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    new2 = new()
+    count = 0
+    if new2:
+        count += 1
+    user1 = User.objects.get(id=request.user.id)
+    pro=""
+    error = ""
+    try:
+        pro = Bidder.objects.get(user=user1)
+        if pro:
+            error="pat"
+    except:
+        pro = Auction_User.objects.get(user=user1)
+    error = False
+    pro1 = Participant.objects.get(id=pid)
+    d = {'error':error,'pro':pro1,'data':pro,'count':count,'new2':new2}
+    return render(request, 'winner_announced.html',d)
+
+def Winner1(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    data = 0
+    user = User.objects.get(username=request.user.username)
+    error = ""
+    try:
+        data = Bidder.objects.get(user=user)
+        if data:
+            error = "pat"
+    except:
+        data = Auction_User.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('Member_Payment_mode')
+    pro2 = Product.objects.get(id=pid)
+    au = Aucted_Product.objects.get(product=pro2)
+    re = Result.objects.get(result="Winner")
+    pro1 = ""
+    try:
+        pro1 = Participant.objects.get(aucted_product=au, result=re)
+    except:
+        pass
+    terror = False
+    if not pro1:
+        terror=True
+    d = {'pro':pro1,'error':error,'terror':terror}
+    return render(request,'winner2.html',d)
+
+def Winner2(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    data = 0
+    user = User.objects.get(username=request.user.username)
+    error = ""
+    try:
+        data = Bidder.objects.get(user=user)
+        if data:
+            error = "pat"
+    except:
+        data = Auction_User.objects.get(user=user)
+
+    if data.membership.fee == "Unpaid":
+        return redirect('Member_Payment_mode')
+    pro2 = Product.objects.get(id=pid)
+    au = Aucted_Product.objects.get(product=pro2)
+    re = Result.objects.get(result="Winner")
+    pro1 = Participant.objects.get(aucted_product=au, result=re)
+    d = {'pro': pro1, 'error': error}
+    return render(request, 'winner2.html', d)
+
+def winner_announced(request):
+    return redirec('result')    
