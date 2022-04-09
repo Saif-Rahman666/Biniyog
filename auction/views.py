@@ -1236,3 +1236,110 @@ def Winner2(request,pid):
 
 def winner_announced(request):
     return redirec('result')    
+
+def Edit_SubCategory(request,pid):
+    if not request.user.is_staff:
+        return redirect('login_user')
+    new2 = new()
+    count = 0
+    if new2:
+        count += 1
+    user1 = User.objects.get(id=request.user.id)
+    pro=""
+    try:
+        pro = Bidder.objects.get(user=user1)
+        if pro:
+            error="pat"
+    except:
+        pro = Auction_User.objects.get(user=user1)
+    error = False
+    cat = Category.objects.all()
+    subcat = Sub_Category.objects.get(id=pid)
+    if request.method == 'POST':
+        n = request.POST['cat']
+        s = request.POST['scat']
+        subcat.category = Category.objects.get(name=n)
+        subcat.name = s
+        subcat.save()
+        error = True
+    d = {'error':error,'pro':pro,'data':pro,'cat':cat,'subcat':subcat,'count':count,'new2':new2}
+    return render(request, 'edit_subcategory.html',d)   
+
+def delete_subcategory(request,pid):
+    cat = Sub_Category.objects.get(id=pid)
+    cat.delete()
+    return redirect('view_subcategory')     
+
+def delete_feedback(request,pid):
+    cat = Send_Feedback.objects.get(id=pid)
+    cat.delete()
+    return redirect('view_feedback')    
+
+def Edit_Session_date(request,pid):
+    if not request.user.is_staff:
+        return redirect('login_user')
+    new2 = new()
+    count = 0
+    if new2:
+        count += 1
+    user1 = User.objects.get(id=request.user.id)
+    pro=""
+    try:
+        pro = Bidder.objects.get(user=user1)
+        if pro:
+            error="pat"
+    except:
+        pro = Auction_User.objects.get(user=user1)
+    error = False
+    ses = Session_date.objects.get(id=pid)
+    if request.method == 'POST':
+        n = request.POST['date']
+        ses.date = n
+        ses.save()
+        error = True
+    d = {'error':error,'pro':pro,'data':pro,'ses':ses,'count':count,'new2':new2}
+    return render(request, 'edit_session_date.html',d)
+
+def Edit_Session_time(request,pid):
+    if not request.user.is_staff:
+        return redirect('login_user')
+    new2 = new()
+    count = 0
+    if new2:
+        count += 1
+    user1 = User.objects.get(id=request.user.id)
+    pro=""
+    try:
+        pro = Bidder.objects.get(user=user1)
+        if pro:
+            error="pat"
+    except:
+        pro = Auction_User.objects.get(user=user1)
+    error = False
+    sed = Session_date.objects.all()
+    sett = Session_Time.objects.get(id=pid)
+    if request.method == 'POST':
+        d = request.POST['date']
+        t = request.POST['time']
+        sedd = Session_date.objects.get(id=d)
+        sett.date = sedd
+        sett.time = t
+        sett.save()
+        error = True
+    d = {'error':error,'pro':pro,'data':pro,'sed':sed,'sett':sett,'count':count,'new2':new2}
+    return render(request, 'edit_session_time.html',d)   
+
+def delete_category(request,pid):
+    cat = Category.objects.get(id=pid)
+    cat.delete()
+    return redirect('view_category')     
+
+def delete_session_date(request,pid):
+    cat = Session_date.objects.get(id=pid)
+    cat.delete()
+    return redirect('view_session_date')    
+
+def delete_session_time(request,pid):
+    cat = Session_Time.objects.get(id=pid)
+    cat.delete()
+    return redirect('view_session_time')    

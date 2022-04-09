@@ -56,4 +56,14 @@ urlpatterns = [
     path('winner(<int:pid>)', Winner,name='winner'),
     path('winner1(<int:pid>)', Winner1,name='winner1'),
     path('winner2(<int:pid>)', Winner2,name='winner2'),
-]
+    path('start_auction(<int:pid>)', Start_Auction, name='start_auction'),
+    path('edit_category(<int:pid>)', Edit_Category, name='edit_category'),
+    path('edit_subcategory(<int:pid>)', Edit_SubCategory, name='edit_subcategory'),
+    path('edit_session_date(<int:pid>)', Edit_Session_date, name='edit_session_date'),
+    path('edit_session_time(<int:pid>)', Edit_Session_time, name='edit_session_time'),
+    path('delete_category(<int:pid>)', delete_category, name='delete_category'),
+    path('delete_feedback(<int:pid>)', delete_feedback, name='delete_feedback'),
+    path('delete_subcategory(<int:pid>)', delete_subcategory, name='delete_subcategory'),
+    path('delete_session_date(<int:pid>)', delete_session_date, name='delete_session_date'),
+    path('delete_session_time(<int:pid>)', delete_session_time, name='delete_session_time'),
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
