@@ -6,6 +6,7 @@
 
 <style>
 .glow {
+  font-family: cursive;
   font-size: 80px;
   color: #fff;
   text-align: center;
@@ -16,17 +17,17 @@
 
 @-webkit-keyframes glow {
   from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60000, 0 0 40px #e60000, 0 0 50px #e60000, 0 0 60px #e60000, 0 0 70px #e60000;
   }
 
   to {
-    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    text-shadow: 0 0 20px #fff, 0 0 30px #db8112, 0 0 40px #db8112, 0 0 50px #db8112, 0 0 60px #db8112, 0 0 70px #db8112, 0 0 80px #db8112;
   }
 }
 
 /* Rounded border */
 hr.rounded {
-  border-top: 8px solid lightblue;
+  border-top: 8px solid red;
   border-radius: 5px;
 }
 
@@ -50,31 +51,31 @@ h2, h4{
 <div class="container" style="margin-top:10%;height:150px;width:100%">
     <div class="row" style="height:90%">
         <div style="height:100px;" class="col-md-3 prjdiv">
-            <div class="container1" style="background:#f73e3e">
+            <div class="container1" style="background:#090536">
             <h2 style="color:white">{{count}}</h2>
-            <a href="{% url 'new_product' %}"><h4 style="color:black">New Product</h4>
+            <a href="{% url 'new_product' %}"><h4 style="color:white">New Product</h4>
         </a>
             </div>
         </div>
         <div style="height:100px;" class="col-md-3 prjdiv">
-            <div class="container1" style="background:#0069d1">
+            <div class="container1" style="background:#090536">
             <h2 style="color:white">{{all_p}}</h2>
-            <a href="{% url 'all_product2' %}"><h4 style="color:black">All Product</h4>
+            <a href="{% url 'all_product2' %}"><h4 style="color:white">All Product</h4>
 
             </a>
        </div>
         </div>
         <div style="height:100px;" class="col-md-3 prjdiv">
-             <div class="container1" style="background:#07d100">
+             <div class="container1" style="background:#090536">
             <h2 style="color:white">{{all_b}}</h2>
-            <a href="{% url 'bidder_user' %"><h4 style="color:black">Total Bidder</h4>
+            <a href="{% url 'bidder_user' %"><h4 style="color:white">Total Bidder</h4>
         </a>
              </div>
         </div>
          <div style="height:100px;" class="col-md-3 prjdiv">
-             <div class="container1" style="background:#d1c000">
+             <div class="container1" style="background:#090536">
              <h2 style="color:white">{{all_s}}</h2>
-            <a href="{% url 'seller_user' %}"><h4 style="color:black">Total Seller</h4></a>
+            <a href="{% url 'seller_user' %}"><h4 style="color:white">Total Seller</h4></a>
              </div>
         </div>
     </div>
@@ -88,9 +89,9 @@ h2, h4{
 
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
-            <p style = "font-size : 30pt ; color : #FF0000 ; font-weight : bold">
+            <p style = "font-size : 15pt ; color : #090536 ; font-weight : bold">
 
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All Rights Reserved <span style = "color : brown">|</span> <span style = "color : #006400">This website is made with <i class="fas fa-heart icon-heart text-warning" aria-hidden="true"></i> by </span><a class= "glow" href="#" target="_blank" >Pankaj Panjwani</a>
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All Rights Reserved</span><a class= "glow" href="#" target="_blank">Biniyog</a>
 
             </p>
           </div>

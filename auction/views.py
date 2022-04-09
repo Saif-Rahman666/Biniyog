@@ -1030,3 +1030,135 @@ def Start_Auction(request,pid):
 
     d = {'pro':pro1,'pro2':pro2,'end2':end2,'error':error,'terror':terror}
     return render(request,'start_auction.html',d)
+
+def Bidder_User(request):
+    if not request.user.is_staff:
+        return redirect('login_user')
+    user1 = User.objects.get(id=request.user.id)
+    pro=""
+    try:
+        pro = Bidder.objects.get(user=user1)
+        if pro:
+            error="pat"
+    except:
+        pro = Auction_User.objects.get(user=user1)
+    error = False
+    st = Status.objects.get(status = "pending")
+    prod = Bidder.objects.all()
+    d = {'error':error,'pro':pro,'data':pro,'prod':prod}
+    return render(request, 'new_user.html',d)
+
+def Bidder_Home(request):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    data = 0
+    user=User.objects.get(username=request.user.username)
+    error=""
+    try:
+        data = Bidder.objects.get(user=user)
+        if data:
+            error = "pat"
+    except:
+        data = Auction_User.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('Member_Payment_mode')
+    d = {'error':error,'data':data}
+    return render(request,'dashboard.html',d)    
+
+def product_detail(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    data = 0
+    user = User.objects.get(username=request.user.username)
+    error = ""
+    try:
+        data = Bidder.objects.get(user=user)
+        if data:
+            error = "pat"
+    except:
+        data = Auction_User.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('Member_Payment_mode')
+    pro = Product.objects.get(id=pid)
+    end = pro.session.time.split(':')
+    end1=""
+    if end[0]== "23":
+        end1="00"
+    else:
+        end1 = str(int(end[0])+1)
+    end2 = end1+":"+end[1]
+    pro1 = Aucted_Product.objects.get(product=pro)
+    d = {'pro':pro,'pro1':pro1,'error':error,'end2':end2}
+    return render(request,'product_detail.html',d)
+
+def product_detail2(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    data = 0
+    user = User.objects.get(username=request.user.username)
+    error = ""
+    try:
+        data = Bidder.objects.get(user=user)
+        if data:
+            error = "pat"
+    except:
+        data = Auction_User.objects.get(user=user)
+
+    pro = Product.objects.get(id=pid)
+    end = pro.session.time.split(':')
+    end1 = ""
+    if end[0] == "23":
+        end1 = "00"
+    else:
+        end1 = str(int(end[0]) + 1)
+    end2 = end1 + ":" + end[1]
+    pro1 = Aucted_Product.objects.get(product=pro)
+    d = {'pro':pro,'pro1':pro1,'error':error,'data':data,'end2':end2}
+    return render(request,'product_detail2.html',d)    
+
+def view_popup(request):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    error=True
+    d = {'error':error}
+    return render(request,'view_popup.html',d)    
+
+def Payment_mode(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    data = 0
+    user = User.objects.get(username=request.user.username)
+    error = ""
+    try:
+        data = Bidder.objects.get(user=user)
+        if data:
+            error = "pat"
+    except:
+        data = Auction_User.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('Member_Payment_mode')
+
+    d = {'error':error,'pid':pid}
+    return render(request,'payment_mode.html',d)    
+
+def Participated_user(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    data = 0
+    user = User.objects.get(username=request.user.username)
+    error = ""
+    try:
+        data = Bidder.objects.get(user=user)
+        if data:
+            error = "pat"
+    except:
+        data = Auction_User.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('Member_Payment_mode')
+    auc = Aucted_Product.objects.get(id=pid)
+    pro1 =  Participant.objects.filter(aucted_product=auc)
+    message1=""
+    if not pro1:
+        message1 = "No Bidder"
+    d = {'part':pro1,'error':error,'message1':message1}
+    return render(request,'participated_user.html',d)    
