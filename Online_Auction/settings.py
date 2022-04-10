@@ -33,12 +33,9 @@ STATICFILES_DIRS = (
 SECRET_KEY = '_igtoud8=l*xejhiwtfz$ce-fu*%80&^hybem91#g#)5j7td#z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['localhost',
-  '127.0.0.1',
-  'biniyog.herokuapp.com',
-  'https://biniyog.vercel.app']
+ALLOWED_HOSTS = []
 
 
 # Application definition
