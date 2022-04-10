@@ -69,3 +69,4 @@ urlpatterns = [
     path('payment2(<int:pid>)', Credit_Card, name='payment2'),
     path('google_pay(<int:pid>)', Google_pay, name='google_pay'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
