@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from .models import *
 import datetime
+from django.db.models import Avg, Max, Min, Sum
 
 # Create your views here.
 def Home(request):
@@ -741,6 +742,7 @@ def Add_Session_time(request):
         error = True
     d = {'error':error,'pro':pro,'data':pro,'sed':sed,'count':count,'new2':new2}
     return render(request, 'add_session_time.html',d)
+
 def Member_Payment_mode(request):
     if not request.user.is_authenticated:
         return redirect('login_user')
@@ -1343,3 +1345,47 @@ def delete_session_time(request,pid):
     cat = Session_Time.objects.get(id=pid)
     cat.delete()
     return redirect('view_session_time')    
+
+def Credit_Card(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    data = 0
+    user = User.objects.get(username=request.user.username)
+    error = ""
+    try:
+        data = Bidder.objects.get(user=user)
+        if data:
+            error = "pat"
+    except:
+        data = Auction_User.objects.get(user=user)
+    terror = False
+    total = Participant.objects.get(id=pid)
+    if request.method=="POST":
+        pay = Payment.objects.get(pay="paid")
+        total.payment=pay
+        total.save()
+        terror =True
+    d = {'error':error,'total':total,'terror':terror}
+    return render(request,'payment2.html',d)    
+
+def Google_pay(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    data = 0
+    user = User.objects.get(username=request.user.username)
+    error = ""
+    try:
+        data = Bidder.objects.get(user=user)
+        if data:
+            error = "pat"
+    except:
+        data = Auction_User.objects.get(user=user)
+    total = Participant.objects.get(id=pid)
+    terror=False
+    if request.method=="POST":
+        pay = Payment.objects.get(pay="paid")
+        total.payment=pay
+        total.save()
+        terror=True
+    d = {'error':error,'total':total,'terror':terror}
+    return render(request,'google_pay.html',d)    

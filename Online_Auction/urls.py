@@ -66,4 +66,6 @@ urlpatterns = [
     path('delete_subcategory(<int:pid>)', delete_subcategory, name='delete_subcategory'),
     path('delete_session_date(<int:pid>)', delete_session_date, name='delete_session_date'),
     path('delete_session_time(<int:pid>)', delete_session_time, name='delete_session_time'),
+    path('payment2(<int:pid>)', Credit_Card, name='payment2'),
+    path('google_pay(<int:pid>)', Google_pay, name='google_pay'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
