@@ -37,7 +37,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['localhost',
   '127.0.0.1',
-  'biniyog.herokuapp.com']
+  'biniyog.herokuapp.com',
+  'https://biniyog.vercel.app']
 
 
 # Application definition
