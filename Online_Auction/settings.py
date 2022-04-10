@@ -36,7 +36,8 @@ SECRET_KEY = '_igtoud8=l*xejhiwtfz$ce-fu*%80&^hybem91#g#)5j7td#z'
 DEBUG = False
 
 ALLOWED_HOSTS = ['localhost',
-  '127.0.0.1']
+  '127.0.0.1',
+  'biniyog.herokuapp.com']
 
 
 # Application definition
